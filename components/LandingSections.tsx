@@ -1,16 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
-import { Check, X } from "lucide-react";
-import Footer from "./Footer";
 
 const LandingSections = () => {
   return (
