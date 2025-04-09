@@ -147,33 +147,58 @@ export default function Chat() {
                         } shadow-[0_0_10px_#ff0059]/40`}
                     >
                         <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            code({ inline, children, ...props }) {
-                              return inline ? (
-                                <code {...props} className="bg-gray-200 px-1 rounded">
-                                  {children}
-                                </code>
-                              ) : (
-                                <pre
-                                  {...props}
-                                  className="bg-gray-200 px-2 py-1 rounded overflow-x-auto"
-                                  style={{ width: "100%" }} 
-                                >
-                                  <code>{children}</code>
-                                </pre>
-                              );
-                            },
-                            ul: ({ children }) => (
-                              <ul className="list-disc pl-4 space-y-1">{children}</ul>
-                            ),
-                            ol: ({ children }) => (
-                              <ol className="list-decimal ml-4 space-y-1">{children}</ol>
-                            ),
-                          }}
-                        >
-                          {message.content}
-                        </ReactMarkdown>
+  remarkPlugins={[remarkGfm]}
+  components={{
+    code({ inline, children, ...props }) {
+      if (inline) {
+        return (
+          <code
+            {...props}
+            className="bg-zinc-800 text-fuchsia-300 px-1.5 py-0.5 rounded-md font-mono text-sm"
+          >
+            {children}
+          </code>
+        );
+      }
+
+      return (
+        <pre
+          {...props}
+          className="bg-zinc-900 text-fuchsia-200 p-4 rounded-xl overflow-x-auto font-mono text-sm shadow-[0_0_15px_#ff0059]/30"
+        >
+          <code>{children}</code>
+        </pre>
+      );
+    },
+    ul: ({ children }) => (
+      <ul className="list-disc pl-6 text-fuchsia-200 space-y-1">{children}</ul>
+    ),
+    ol: ({ children }) => (
+      <ol className="list-decimal pl-6 text-fuchsia-200 space-y-1">{children}</ol>
+    ),
+    a: ({ children, href }) => (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-fuchsia-400 underline hover:text-pink-400 transition"
+      >
+        {children}
+      </a>
+    ),
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-4 border-fuchsia-600 pl-4 italic text-fuchsia-300">
+        {children}
+      </blockquote>
+    ),
+    strong: ({ children }) => (
+      <strong className="text-fuchsia-500 font-semibold">{children}</strong>
+    ),
+  }}
+>
+  {message.content}
+</ReactMarkdown>
+
                       </div>
                     </div>
                   ))}
