@@ -149,8 +149,8 @@ export default function Chat() {
                         <ReactMarkdown
   remarkPlugins={[remarkGfm]}
   components={{
-    code({ inline, children, ...props }) {
-      if (inline) {
+    code({ inlist, children, ...props }) {
+      if (inlist) {
         return (
           <code
             {...props}
@@ -162,12 +162,12 @@ export default function Chat() {
       }
 
       return (
-        <pre
+        <span
           {...props}
           className="bg-zinc-900 text-fuchsia-200 p-4 rounded-xl overflow-x-auto font-mono text-sm shadow-[0_0_15px_#ff0059]/30"
         >
           <code>{children}</code>
-        </pre>
+        </span>
       );
     },
     ul: ({ children }) => (
